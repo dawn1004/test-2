@@ -1,0 +1,20 @@
+{
+  "records": [
+    {
+      "id": "123-23-a-3asd-34",
+      "name": "Mag lalaba ako",
+      "description": "Corn asdasd",
+      "category": "Bussiness",
+      "isActive": false,
+      "created": "Sun Jun 11 2023 21:40:15 GMT+0800 (Philippine Standard Time)"
+    },
+    {
+      "id": "23asd-3asd-35as-3",
+      "name": "Study ako",
+      "description": "Salad asdasd",
+      "category": "Work",
+      "isActive": true,
+      "created": "asdasdasdasd"
+    }
+  ]
+}
