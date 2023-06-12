@@ -23,9 +23,10 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 interface TextBoxProps {
   label: string;
   defaultValue?: string;
+  required?: boolean;
 }
 
-const TextBox: FC<TextBoxProps> = ({ label, defaultValue = '' }) => {
+const TextBox: FC<TextBoxProps> = ({ label, defaultValue = '', required=false }) => {
   const [value, setValue] = useState(defaultValue);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -55,6 +56,7 @@ const TextBox: FC<TextBoxProps> = ({ label, defaultValue = '' }) => {
         className="border rounded-md px-4 py-2"
         value={value}
         onChange={handleInputChange}
+        required={required}
       />
     </div>
   );

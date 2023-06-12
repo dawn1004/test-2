@@ -1,37 +1,34 @@
 import { Record } from '@/interfaces/Record';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { v4 as uuidv4 } from 'uuid';
-import jsonfile from 'jsonfile'
 
 
-const file = 'records.json'
-
-export let records: Record[] = []
-
-jsonfile.readFile(file, function (err, obj) {
-  if (err) console.error(err)
-  console.dir(obj)
-  records = obj.records
-})
-
-// export let records: Record[] = [
-//   {
-//     id: '123-23-a-3asd-34',
-//     name: 'Mag lalaba ako',
-//     description: 'Corn asdasd',
-//     category: 'Bussiness',
-//     isActive: false,
-//     created: 'Sun Jun 11 2023 21:40:15 GMT+0800 (Philippine Standard Time)'
-//   },
-//   {
-//     id: '23asd-3asd-35as-3',
-//     name: 'Study ako',
-//     description: 'Salad asdasd',
-//     category: 'Work',
-//     isActive: true,
-//     created: 'asdasdasdasd'
-//   }
-// ];
+export let records: Record[] = [
+  {
+    id: '123-23-a-3asd-34',
+    name: 'Play table tennis',
+    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, iste fugit! Nihil reiciendis necessitatibus culpa, minima aliquam magnam natus veniam! Placeat maxime assumenda distinctio mollitia id, voluptatem ea sit voluptas?',
+    category: 'Personal',
+    isActive: true,
+    created: 'Sun Jun 11 2023 21:40:15 GMT+0800 (Philippine Standard Time)'
+  },
+  {
+    id: '23asd-3asd-35as-3',
+    name: 'Fix ticket #123',
+    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, iste fugit! Nihil reiciendis necessitatibus culpa, minima aliquam magnam natus veniam! Placeat maxime assumenda distinctio mollitia',
+    category: 'Work',
+    isActive: true,
+    created: 'Sun Jun 11 2023 21:40:15 GMT+0800 (Philippine Standard Time)'
+  },
+  {
+    id: '233as-3dsvt-35as-3',
+    name: 'Do inventory and clean store',
+    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, iste fugit! Nihil reiciendis necessitatibus.',
+    category: 'Bussiness',
+    isActive: false,
+    created: 'Sun Jun 11 2023 21:40:15 GMT+0800 (Philippine Standard Time)'
+  }
+];
 
 export const deleteRecord = (id: string) => {
   records = records.filter(record => record.id !== id)

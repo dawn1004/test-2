@@ -3,9 +3,10 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 interface InputTextProps {
   label: string;
   defaultValue?: string;
+  required?: boolean;
 }
 
-const InputText: FC<InputTextProps> = ({ label, defaultValue = '' }) => {
+const InputText: FC<InputTextProps> = ({ label, defaultValue = '', required=false }) => {
   const [value, setValue] = useState(defaultValue);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -36,6 +37,7 @@ const InputText: FC<InputTextProps> = ({ label, defaultValue = '' }) => {
         className="border rounded-md px-4 py-2"
         value={value}
         onChange={handleInputChange}
+        required={required}
       />
     </div>
   );

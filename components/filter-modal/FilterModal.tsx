@@ -5,9 +5,10 @@ import Select from '../forms/select/Select'
 interface FilterModalProps {
   visibleSetter: Dispatch<SetStateAction<boolean>>
   setFilterActiveValue: Dispatch<SetStateAction<string>>
+  defaultVal: string
 }
 
-const FilterModal: FC<FilterModalProps> = ({visibleSetter, setFilterActiveValue}) => {
+const FilterModal: FC<FilterModalProps> = ({visibleSetter, setFilterActiveValue, defaultVal}) => {
   const queryClient = useQueryClient()
 
   const handleHideModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -30,7 +31,7 @@ const FilterModal: FC<FilterModalProps> = ({visibleSetter, setFilterActiveValue}
           <h3 className='font-semibold text-xl text-gray-700'>Filters:</h3>
         </div>
         <form onSubmit={handleSubmit}>
-          <Select label="Active / Inactive" options={['All', 'Active', 'Inactive']} defaultValue={'All'} />
+          <Select label="Active / Inactive" options={['All', 'Active', 'Inactive']} defaultValue={defaultVal} />
           <button className='bg-blue-600 border-2 border-white text-white md:px-6 px-4 py-2 md:text-base text-sm rounded-lg hover:bg-white hover:text-blue-600 hover:border-2 hover:border-blue-600 transition-all'>Save</button>           
         </form>
    

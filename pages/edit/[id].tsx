@@ -26,14 +26,14 @@ const Edit: NextPage = () => {
   const recordsQuery = useQuery({
     queryKey: ['record'],
     queryFn: () =>
-      fetch(`http://localhost:3000/api/records/${id}`).then(
+      fetch(`/api/records/${id}`).then(
         async (res) => await res.json(),
       ),
   })
 
   const mutation = useMutation({
     mutationFn: (data: Record) => {
-      return fetch(`http://localhost:3000/api/records/${id}`, {
+      return fetch(`/api/records/${id}`, {
         method: 'PATCH',
         headers: {
           'Accept': 'application/json',
@@ -76,10 +76,10 @@ const Edit: NextPage = () => {
           recordsQuery.isLoading || recordsQuery.isError? 
           <div>loading...</div>:
           <form onSubmit={handleSubmit}>
-            <InputText label="Name/Title" defaultValue={recordsQuery.data.records[0]?.name || ''} />
-            <Select label="Category" options={categories} defaultValue={recordsQuery.data.records[0]?.category || ''} />
-            <TextBox label="Description" defaultValue={recordsQuery.data.records[0]?.description || ''} />
-            <Select label="Active" options={['true', 'false']} defaultValue={(recordsQuery.data.records[0]?.isActive? 'true': 'false') || ''} />
+            <InputText label="Name/Title" defaultValue={recordsQuery.data.records[0]?.name || ''} required />
+            <Select label="Category" options={categories} defaultValue={recordsQuery.data.records[0]?.category || ''} required />
+            <TextBox label="Description" defaultValue={recordsQuery.data.records[0]?.description || ''} required />
+            <Select label="Active" options={['true', 'false']} defaultValue={(recordsQuery.data.records[0]?.isActive? 'true': 'false') || ''} required />
 
             <button 
             type='submit'

@@ -4,6 +4,7 @@ import { data } from 'autoprefixer'
 import Link from 'next/link'
 import React, { Dispatch, FC, SetStateAction, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import EmptyState from '../EmptyState'
 
 interface RecordListProps {
   records: Record[]
@@ -20,7 +21,7 @@ const RecordList: FC<RecordListProps> = ({records, checkedIds,  setCheckedIds, h
 
   const mutation = useMutation({
     mutationFn: (id: string) => {
-      return fetch(`http://localhost:3000/api/records/${id}`, {
+      return fetch(`/api/records/${id}`, {
         method: 'DELETE'
       })
     },
@@ -54,6 +55,7 @@ const RecordList: FC<RecordListProps> = ({records, checkedIds,  setCheckedIds, h
 
   const handleMultiDeleteClick = () => {
     handleMultiDelete()
+    if(selectAllCheckboxRef.current?.checked)
     selectAllCheckboxRef.current?.click()
   }
 
@@ -68,16 +70,21 @@ const RecordList: FC<RecordListProps> = ({records, checkedIds,  setCheckedIds, h
           >
             Delete all seleted items
           </span>: <div></div>
-        }        
-        <input ref={selectAllCheckboxRef} type="checkbox" name="" id="" className='w-4 h-4 cursor-pointer' onChange={handleCheckAllToggle} />            
+        } 
+        {
+          records.length?
+          <input ref={selectAllCheckboxRef} type="checkbox" name="" id="" className='w-4 h-4 cursor-pointer' onChange={handleCheckAllToggle} />:
+          null
+        }
       </div>
       <div key={checkBoxKey} className='col-span-12 grid grid-cols-12 gap-4'>
         {
+          records.length?
           records.map(record => 
           <div key={record.id} className={`col-span-12 bg-gray-50 shadow-sm border rounded-lg`}>
-            <div className='w-full border-b px-4 py-3 flex items-center justify-between'>
+            <div className='w-full border-b px-4 py-3 flex md:items-center justify-between md:flex-row flex-col-reverse'>
               <h5 className={`font-semibold text-lg text-gray-600 ${record.isActive? null:'line-through'}`}>{record.name}</h5>
-              <div className='flex items-center'>
+              <div className='flex items-center md:justify-normal justify-end'>
                 <button onClick={()=>{handleDelete(record.id)}} className='text-gray-600 hover:text-red-700 text-sm mr-2 hover:bg-red-100 px-2 rounded'>Delete</button>   
                 <Link href={'/edit/'+String(record.id)} className='text-gray-600 hover:text-gray-800 text-sm mr-2 hover:bg-gray-200 px-2 rounded'>Edit</Link>   
                 <input type="checkbox" name="" id="" className='w-4 h-4 cursor-pointer' onChange={(e)=>{handleCheckboxChange(e, record.id)}} defaultChecked={allChecked} />            
@@ -86,8 +93,9 @@ const RecordList: FC<RecordListProps> = ({records, checkedIds,  setCheckedIds, h
             <div className={`px-4 py-4 ${record.isActive? null:'line-through'}`}>
               <p>{record.description}</p>
             </div>
-          </div>  
-          )
+          </div> 
+          ):
+          <EmptyState /> 
         }        
       </div>
 

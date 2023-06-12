@@ -17,14 +17,14 @@ export default function Home() {
   const recordsQuery = useQuery({
     queryKey: ['records'],
     queryFn: () =>
-      fetch(`http://localhost:3000/api/records?${searchName !== ''? `name=${searchName}`: ''}&filterActive=${filterActiveValue}`).then(
+      fetch(`/api/records?${searchName !== ''? `name=${searchName}`: ''}&filterActive=${filterActiveValue}`).then(
         async (res) => await res.json(),
       ),
   })
 
   const multiDeleteMutation = useMutation({
     mutationFn: (ids: string[]) => {
-      return fetch(`http://localhost:3000/api/records/`, {
+      return fetch(`/api/records/`, {
         method: 'PUT',
         headers: {
           'Accept': 'application/json',
@@ -62,7 +62,7 @@ export default function Home() {
         }  
         {
           filterModalVisble?
-          <FilterModal visibleSetter={setFilterModalVisble} setFilterActiveValue={setFilterActiveValue} />:null
+          <FilterModal visibleSetter={setFilterModalVisble} setFilterActiveValue={setFilterActiveValue} defaultVal={filterActiveValue} />:null
         }
       </>
     </Layout>

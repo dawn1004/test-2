@@ -1,3 +1,8 @@
+Dawn Message:
+Hello! This app does not utilize a database. Instead, all the data is stored in a variable within the Rest API of Next.js (located at pages/api/*). It's important to note that reloading or refreshing the app may result in the loss of any new data you've entered. To mitigate this, I recommend using the "next start" command instead of "next dev" when running the app. The development mode can sometimes trigger server reloads, leading to data loss.
+Thank you!
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
